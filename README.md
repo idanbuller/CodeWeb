@@ -5,7 +5,7 @@ This project is a web-based E-learning system that enables users to learn, imple
 We understand that there are more and more cyber e-learning systems, and this is because they allow users to learn from anywhere and at any time, with access to updated and comprehensive information. Our system includes several components such as Content Management System (CMS), Learning Management System (LMS), advanced and accessible user interface, as well as software and tools for translation, data transfer, and resource management.
 
 
-![CodeWecodewebappo](images/CodeWecodewebappo.png)
+![CodeWeblogo](images/CodeWeblogo.png)
 
 
 ## Authors
