@@ -5,7 +5,7 @@ This project is a web-based E-learning system that enables users to learn, imple
 We understand that there are more and more cyber e-learning systems, and this is because they allow users to learn from anywhere and at any time, with access to updated and comprehensive information. Our system includes several components such as Content Management System (CMS), Learning Management System (LMS), advanced and accessible user interface, as well as software and tools for translation, data transfer, and resource management.
 
 
-![CodeWeblogo](images/CodeWeblogo.png)
+![CodeWecodewebappo](images/CodeWecodewebappo.png)
 
 
 ## Authors
@@ -168,7 +168,7 @@ This code the the URL configuration of the project.
 
 - The next four URL patterns are related to the password reset feature. They map the URLs /password-reset/, /password-reset/done/, /password-reset-confirm/<uidb64>/<token>/, and /password-reset-complete/ to the corresponding built-in Django views for the password reset feature.
 
-- Finally, the last URL pattern includes the URL configuration of another Django app called blog, by mapping the root URL to the blog.urls URL configuration.
+- Finally, the last URL pattern includes the URL configuration of another Django app called codewebapp, by mapping the root URL to the codewebapp.urls URL configuration.
 
 - The last if statement is a check to see if the project is in debug mode, and if it is, it adds a URL pattern for serving media files at settings.MEDIA_URL. This is done using the static() function imported from django.conf.urls.static. The document_root argument specifies the local directory to serve the media files from.
 
@@ -199,7 +199,7 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'
          ),
          name='password_reset_complete'),
-    path('', include('blog.urls')),
+    path('', include('codewebapp.urls')),
 ]
 ```
 
@@ -255,10 +255,10 @@ def profile(request):
 ```
 
 
-### blog\urls.py
+### codewebapp\urls.py
 This code defines the URL patterns for CodeWeb's web application. Each URL pattern is associated with a specific view function that gets called when the user requests that URL.
 
-- The urlpatterns list starts by importing several view functions from a views.py file. These functions correspond to different pages in the application, such as the home page, user profile pages, and various blog posts. It also imports a function called change_password from the same views.py file.
+- The urlpatterns list starts by importing several view functions from a views.py file. These functions correspond to different pages in the application, such as the home page, user profile pages, and various codewebapp posts. It also imports a function called change_password from the same views.py file.
 
 - Each URL pattern in urlpatterns is defined using the path() function. The first argument to path() is the URL pattern that the user will request. The second argument is the view function that should be called when the user requests that URL. The third argument is an optional name that can be used to refer to the URL pattern in other parts of the code.
 
@@ -270,41 +270,41 @@ This code defines the URL patterns for CodeWeb's web application. Each URL patte
 
 ```python
 urlpatterns = [
-    path('', PostListView.as_view(), name='blog-home'),
+    path('', PostListView.as_view(), name='codewebapp-home'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('about/', views.about, name='blog-about'),
-    path('AllSQLi/', views.AllSQLi, name='blog-AllSQLi'),
-    path('SQLi/', views.SQLi, name='blog-SQLi'),
-    path('BlindSQLi/', views.BlindSQLi, name='blog-BlindSQLi'),
-    path('BruteForce/', views.BruteForce, name='blog-BruteForce'),
-    path('AllXSS/', views.AllXSS, name='blog-AllXSS'),
-    path('DOMBasedXSS/', views.DOMBasedXSS, name='blog-DOMBasedXSS'),
-    path('ReflectedXSS/', views.ReflectedXSS, name='blog-ReflectedXSS'),
-    path('PermanentXSS/', views.PermanentXSS, name='blog-PermanentXSS'),
-    path('AllBonus/', views.AllBonus, name='blog-AllBonus'),
-    path('UserEnumeration/', views.UserEnumeration, name='blog-UserEnumeration'),
-    path('ClickJacking/', views.ClickJacking, name='blog-ClickJacking'),
-    path('CSRF/', views.CSRF, name='blog-CSRF'),
-    path('search/', views.search, name='blog-search'),
-    path('posts/', views.posts, name='blog-posts'),
+    path('about/', views.about, name='codewebapp-about'),
+    path('AllSQLi/', views.AllSQLi, name='codewebapp-AllSQLi'),
+    path('SQLi/', views.SQLi, name='codewebapp-SQLi'),
+    path('BlindSQLi/', views.BlindSQLi, name='codewebapp-BlindSQLi'),
+    path('BruteForce/', views.BruteForce, name='codewebapp-BruteForce'),
+    path('AllXSS/', views.AllXSS, name='codewebapp-AllXSS'),
+    path('DOMBasedXSS/', views.DOMBasedXSS, name='codewebapp-DOMBasedXSS'),
+    path('ReflectedXSS/', views.ReflectedXSS, name='codewebapp-ReflectedXSS'),
+    path('PermanentXSS/', views.PermanentXSS, name='codewebapp-PermanentXSS'),
+    path('AllBonus/', views.AllBonus, name='codewebapp-AllBonus'),
+    path('UserEnumeration/', views.UserEnumeration, name='codewebapp-UserEnumeration'),
+    path('ClickJacking/', views.ClickJacking, name='codewebapp-ClickJacking'),
+    path('CSRF/', views.CSRF, name='codewebapp-CSRF'),
+    path('search/', views.search, name='codewebapp-search'),
+    path('posts/', views.posts, name='codewebapp-posts'),
     path('change-password/', change_password, name='change_password'),
 ]
 
 ```
 
 
-### blog\views.py
+### codewebapp\views.py
 The code defines views for rendering templates and database queries, and uses the Django's built-in models, forms and authentication features.
 
 Here is a summary of what the code does:
 
-- home(request): This function retrieves all the posts from the database and displays them on the home page of the blog.
+- home(request): This function retrieves all the posts from the database and displays them on the home page of the codewebapp.
 
-- PostListView(ListView): This class retrieves all the posts from the database and displays them on the home page of the blog using Django's generic ListView. It also allows the posts to be paginated.
+- PostListView(ListView): This class retrieves all the posts from the database and displays them on the home page of the codewebapp using Django's generic ListView. It also allows the posts to be paginated.
 
 - UserPostListView(ListView): This class retrieves all the posts for a particular user from the database and displays them on the user's profile page. It also allows the posts to be paginated.
 
@@ -350,7 +350,7 @@ Here is a summary of what the code does:
 
 ```python
 def about(request):
-    return render(request, 'blog/about.html', {'title': 'About'})
+    return render(request, 'codewebapp/about.html', {'title': 'About'})
 
 def DOMBasedXSS(request):
     #posts = Post.objects.all()
@@ -358,10 +358,10 @@ def DOMBasedXSS(request):
         post_id = request.POST.get('post')
         post = Post.objects.get(id=post_id)
         print(post_id)
-        return render(request, 'blog/test.html', {'post': post})
+        return render(request, 'codewebapp/test.html', {'post': post})
     else:
         posts = Post.objects.all()
-        return render(request, 'blog/DOMBasedXSS.html', {'posts': posts})
+        return render(request, 'codewebapp/DOMBasedXSS.html', {'posts': posts})
 
 def ReflectedXSS(request):
     model = Post
@@ -370,7 +370,7 @@ def ReflectedXSS(request):
     if query:
         results = Post.objects.filter(Q(title=query) | Q(content=query))
 
-    return render(request, 'blog/ReflectedXSS.html', {'results': results, 'query': query})
+    return render(request, 'codewebapp/ReflectedXSS.html', {'results': results, 'query': query})
 
     ...
     ...
