@@ -1,12 +1,11 @@
-
-![CodeWeblogo](images/CodeWeblogo.png)
-
-
 # 🛠 CodeWeb 🛠
 
 This project is a web-based E-learning system that enables users to learn, implement, and protect against well-known web attacks, such as OWASP top 10. We integrated our knowledge as computer science students, combined with a course in computer security and cyber principles, to develop this system.
 
 We understand that there are more and more cyber e-learning systems, and this is because they allow users to learn from anywhere and at any time, with access to updated and comprehensive information. Our system includes several components such as Content Management System (CMS), Learning Management System (LMS), advanced and accessible user interface, as well as software and tools for translation, data transfer, and resource management.
+
+
+![CodeWeblogo](images/CodeWeblogo.png)
 
 
 ## Authors
@@ -40,7 +39,7 @@ Insert gif or link to demo
 ## Features
 
 #### ⚡️XSS HUB
-![XSSHUB](images\XSSHUB.png)
+![XSSHUB](images/XSSHUB.png)
 Learn about the latest Cross-Site-Scripting threats and how to protect yourself online with our interactive and engaging XSS Hub:
 
 - Stored XSS
@@ -50,13 +49,13 @@ Learn about the latest Cross-Site-Scripting threats and how to protect yourself 
 - Reflected XSS
 
 #### ⚡️SQL Injection
-![SQLiHUB](images\SQLiHUB.png)
+![SQLiHUB](images/SQLiHUB.png)
 Learn about the latest SQL Injection threats and how to protect yourself online with our interactive and engaging SQL Injection Hub:
 
 - SQL Injection
 
 #### ⚡️Bonus HUB
-![BONUSHUB](images\BONUSHUB.png)
+![BONUSHUB](images/BONUSHUB.png)
 Learn about the latest Cyber Security threats and how to protect yourself online with our interactive and engaging Bonus Hub:
 
 - Brute Force
