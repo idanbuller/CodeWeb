@@ -1,0 +1,131 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<h1>User Enumeration Attack</h1>
+<h2>Overview</h2>
+<p>User Enumeration is a type of attack that aims to identify valid usernames or email addresses associated with an account on a targeted system or network. This information is then used to carry out more targeted attacks, such as password guessing or social engineering. User Enumeration is often performed through automated means, such as using scripts or tools that can test thousands of usernames or email addresses in a short amount of time.</p>
+<h2>How does User Enumeration work?</h2>
+<p>User Enumeration works by exploiting weaknesses in the way that a system or network handles invalid login attempts. For example, if a website provides different error messages for invalid usernames and incorrect passwords, an attacker can use this information to determine which usernames are valid and which are not. Once the attacker has a list of valid usernames, they can use this information to carry out a targeted attack, such as password guessing or social engineering.</p>
+<br>
+<p>Now, try it yourself and Log In! </p>
+<p>At First try to enter an invalid username and then try to enter a valid username with the wrong password</p>
+<br>
+<div>
+<div class="content-section">
+
+     {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+        <legend class="border-bottom mb-4">Log In</legend>
+      <label for="username">Username:</label>
+      <input type="text" name="username" required>
+        <br>
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'username' %}
+            <p class="error-message">{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
+        <br>
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'password' %}
+            <p class="error-message">{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Login</button>
+      <small class="text-muted ml-2">
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+      </small>
+    </div>
+    </form>
+    <small class="text-muted"> Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+    </small>
+  </div>
+</div>
+
+<br>
+<h2></h2>
+<h2>What is the impact of a successful User Enumeration Attack?</h2>
+<p>A successful User Enumeration Attack can provide an attacker with valuable information that can be used to carry out more targeted attacks. This information can include the email address or username associated with an account, which can then be used to mount a password guessing or social engineering attack. The impact of these types of attacks can be significant, as they can result in unauthorized access to sensitive information, such as passwords, financial data, or personal information.</p>
+<h2>How to prevent User Enumeration Attacks</h2>
+<p>There are several ways to prevent User Enumeration Attacks, including:</p>
+<ul>
+  <li>Providing consistent error messages for both invalid usernames and incorrect passwords</li>
+  <li>Limiting the rate of login attempts per IP address or user</li>
+  <li>Implementing CAPTCHA or similar solutions to prevent automated attacks</li>
+  <li>Monitoring log files for signs of User Enumeration attempts</li>
+</ul>
+<p>By being aware of the threat posed by User Enumeration Attacks and taking steps to prevent them, organizations can help protect the security of their sensitive information. </p>
+
+<br>
+
+<h2>What Happens In The Background?</h2>
+<p>The following function handles the login request:</p>
+<pre>
+						<code>
+def vulnerable_login(request):
+
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('blog-UserEnumeration')
+        else:
+            try:
+                user = User.objects.get(username=username)
+                messages.error(request, 'Invalid password', extra_tags='password')
+            except User.DoesNotExist:
+                messages.error(request, 'Invalid username', extra_tags='username')
+    return render(request, 'blog/UserEnumeration.html')
+    </code>
+					</pre>
+<br>
+<br>
+<h2>How To Defend?</h2>
+<h5>To defend against user enumeration attacks, the following measures can be taken:</h5>
+<ul>
+  <li>Error handling: The error message returned when a login attempt fails should be the same regardless of whether the username exists or not. This makes it difficult for an attacker to determine which username exists in the system.</li>
+  <li>Rate limiting: This involves limiting the number of login attempts from a single IP address within a certain time period. This can prevent an attacker from using automated scripts to perform user enumeration.</li>
+  <li>Obfuscating usernames: Usernames should not be sequential or easily guessable. Consider using random, unique strings instead of actual usernames for identification purposes.</li>
+</ul>
+<p>Here is an example of a secure login function with consistent error handling and obfuscated usernames:
+<pre>
+							<code>
+from django.contrib.auth import authenticate, login
+
+def my_login_view(request):
+if request.method == 'POST':
+username = request.POST['username']
+password = request.POST['password']
+user = authenticate(request, username=username, password=password)
+if user is not None:
+login(request, user)
+# Redirect to a success page.
+...
+else:
+# Return an 'invalid login' error message.
+...
+else:
+# The request is not a POST, so display the login form.
+# This scenario would most likely be a GET request.
+...
+</code>
+</pre> In this example, the authenticate function takes the user's username and password as arguments, and returns a user object if the credentials are valid. If the user is not None, the login function is called to log in the user. If the user is None, an error message is returned. This code is just a basic example, and a real-world implementation should also include rate limiting and password hashing, as mentioned in the previous section.
+{% endblock %}

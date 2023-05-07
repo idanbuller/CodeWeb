@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Welcome to XSS HUB!</h1>
+    <p>Learn about the latest Cross-Site-Scripting threats and how to protect yourself online with our interactive and engaging XSS Hub.</p>
+    <a href="about" class="btn btn-primary">Learn About CodeWeb</a>
+  </div>
+
+  <div id="courses" class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Stored XSS</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from Stored XSS attack and more.</p>
+          <a href="/post/new" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">DOM Based XSS</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from DOM Based XSS.</p>
+          <a href="/DOMBasedXSS" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+              <div class="card-body">
+          <h5 class="card-title">Reflected XSS</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from Reflected XSS.</p>
+          <a href="/ReflectedXSS" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

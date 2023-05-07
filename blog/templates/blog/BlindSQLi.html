@@ -1,0 +1,89 @@
+{% extends "blog/base.html" %} {% block content %}
+
+<h1>Blind SQL Injection</h1>
+<h2>Overview</h2>
+<p>Blind SQL Injection is a type of SQL injection attack that is used to extract information from a database, where the attacker does not have direct access to the database or its contents. Unlike traditional SQL injection attacks, where the attacker can directly view the contents of the database, in a blind SQL injection attack, the attacker is only able to extract information by sending requests to the database and observing the behavior of the application.</p>
+<p>In this section, we'll explain what Blind SQL Injection is, describe some common examples, explain how to find and exploit various kinds of Blind SQL injection vulnerabilities, and summarize how to prevent Blind SQL injection. </p>
+<h2>What is the impact of a successful Blind SQL injection attack?</h2>
+<p>A successful Blind SQL injection attack can result in unauthorized access to sensitive data, such as passwords, credit card details, or personal user information. Blind SQL injection attacks can also be used to extract sensitive information from a database over a longer period of time, allowing the attacker to collect more data without detection. </p>
+<h2>Extracting data from a Blind SQL injection vulnerability</h2>
+<p>Consider a login application that uses a username and password to authenticate a user. The application is vulnerable to Blind SQL injection because it does not properly sanitize user input before using it in an SQL query. </p>
+<pre>
+	<code>
+        SELECT * FROM users WHERE username='$username' AND password='$password'
+    </code>
+</pre>
+<p> An attacker can exploit this vulnerability by sending a specially crafted request to the application that will cause it to return different responses depending on whether a particular condition is true or false. For example, the attacker might send a request like: </p>
+<pre>
+	<code>
+        https://insecure-website.com/login?username=admin' AND (SLEEP(5)=0)--
+    </code>
+</pre>
+<p> This request will cause the application to pause for 5 seconds if the username "admin" exists in the database. The attacker can use this pause to determine if the username exists, and then repeat the process to determine the password associated with the account. </p>
+<p>Now, try it yourself and Log In! <br>
+</p>
+<p>Use the following code: <br>
+  <strong>Username:</strong> test' AND SLEEP(5)=0 -- <br>
+   In the password field you can enter any password you want.
+</p>
+
+<div class="content-section">
+  <form method="POST"> {% csrf_token %} <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Log In</legend>
+      <label for="username">Username:</label>
+      <input type="text" name="username" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
+      <br>
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Login</button>
+      <small class="text-muted ml-2">
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+      </small>
+    </div>
+  </form> {% if error %} <p>{{ error }}</p> {% endif %} <div class="border-top pt-3">
+    <small class="text-muted"> Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+    </small>
+  </div>
+</div>
+
+<br>
+<h2>What Happens In The Background?</h2>
+<p>The following function takes the user input from the search form and concatenates it to the end of a SQL query without proper validation or escaping. </p>
+<pre>
+											<code>
+def search(request):
+    search_input = request.GET.get('search_input', '')
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "SELECT * FROM products WHERE name LIKE '%" + search_input + "%'"
+        )
+        rows = cursor.fetchall()
+    return render(request, 'search_results.html', {'rows': rows})
+</code>
+									</pre>
+
+<h2>How To Defend?</h2>
+<h5>After exploiting the <strong>Blind SQL Injection</strong> vulnerability, let's defend it!</h5>
+<p>
+    Blind SQL injection is a type of security vulnerability that occurs when an attacker is able to inject malicious SQL code into a web application through user-controlled input, even though the application does not directly display the result of the injected SQL code. <br><br>
+    To defend against Blind SQL injection, it is important to validate and escape all user-controlled input that is used in SQL queries. This can be done using Django's queryset methods or using raw SQL with placeholders. <br><br>
+    Here is an example of how to perform a search using parameterized SQL in Django:
+    <pre>
+											<code>
+def search(request):
+    search_input = request.GET.get('search_input', '')
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "SELECT * FROM products WHERE name LIKE %s",
+            ['%' + search_input + '%']
+        )
+        rows = cursor.fetchall()
+        return render(request, 'search_results.html', {'rows': rows})
+</code>
+									</pre>
+</p>
+
+{% endblock content %}

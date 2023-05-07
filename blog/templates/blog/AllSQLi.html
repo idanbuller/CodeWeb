@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<!-- HOME PAGE HTML -->
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Welcome to SQL Injection HUB!</h1>
+    <p>Learn about the latest SQL Injection threats and how to protect yourself online with our interactive and engaging SQL Injection Hub.</p>
+    <a href="/about" class="btn btn-primary">Learn About CodeWeb</a>
+  </div>
+  <div id="courses" class="row">
+            <div class="col-md-4">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">SQL Injection</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from SQL Injection.</p>
+          <a href="/SQLi" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

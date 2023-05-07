@@ -1,0 +1,51 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>Permanent XSS</h1>
+<h2>Overview</h2>
+<p>Permanent XSS (Cross-Site Scripting) is a type of vulnerability that occurs when user-supplied input is stored on the server-side of a web application and is later displayed to other users without proper sanitization. Unlike Reflected XSS, which only affects users who interact with a malicious link or form, Permanent XSS can affect all users who view the affected page or application.</p>
+<p>A successful Permanent XSS attack can allow an attacker to steal sensitive information such as user credentials, manipulate web page content, and perform other malicious actions on behalf of the affected users. In this section, we'll explain what Permanent XSS is, provide some common examples, and summarize how to prevent Permanent XSS vulnerabilities in web applications.</p>
+<h2>What is the impact of a successful Permanent XSS attack?</h2>
+<p>A successful Permanent XSS attack can have severe consequences, as it can result in sensitive information being stolen or manipulated, such as user credentials, or sensitive data displayed on the web page. In some cases, an attacker may be able to take complete control over the affected web page, allowing them to perform arbitrary actions on behalf of all users who view the page. The impact of a Permanent XSS attack can range from being a minor inconvenience to causing serious harm to users and the affected website or application.</p>
+<p>In order to prevent Permanent XSS attacks, it is important to properly sanitize user-supplied input before storing it on the server-side of a web application. This can be done using various techniques such as encoding user input, using a Content Security Policy (CSP), or using a framework that provides XSS protection. </p>
+
+    <p>Use the following code: <br>
+  <strong>Title:</strong> &lt;script>alert("XSS")&lt;/script> <br>
+  <strong>Content:</strong> &lt;script>alert("XSS")&lt;/script> <br>
+</p>
+<div class="content-section">
+  <form method="POST"> {% csrf_token %} <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Submit New Deal</legend>
+      {{ form|crispy | safe }}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+<br>
+
+<h2>How To Defend?</h2>
+<h5>After exploiting the <strong>Permanent XSS</strong> vulnerability, let's defend it! <br>
+</h5>
+<pre>
+								<code>
+&lt;div class="content-section">
+  &lt;form method="POST">
+    {% csrf_token %}
+    &lt;fieldset class="form-group">
+      &lt;legend class="border-bottom mb-4">Submit New Deal&lt;/legend>
+      {{ form|escape | crispy }}
+    &lt;/fieldset>
+    &lt;div class="form-group">
+      &lt;button class="btn btn-outline-info" type="submit">Submit&lt;/button>
+    &lt;/div>
+  &lt;/form>
+&lt;/div>
+</code>
+							</pre>
+<p> In this example, the 'escape' filter is applied to the form variable before it is rendered. This filter will escape any special characters in the form data, making it difficult for an attacker to inject malicious script. Additionally, by removing the safe filter, the Django template engine will no longer trust that the form data is safe and will apply the necessary escaping automatically. </p>
+<p> It is also recommended to validate user input server-side, store user-generated data securely, and properly configure the Content Security Policy (CSP) to prevent permanent XSS attacks. </p>
+
+{% endblock content %}

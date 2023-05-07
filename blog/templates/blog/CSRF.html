@@ -1,0 +1,49 @@
+{% extends "blog/base.html" %} {% block content %}
+
+<h1>Cross-Site Request Forgery (CSRF) Attack</h1>
+<h2>Overview</h2>
+<p>A Cross-Site Request Forgery (CSRF) Attack is a type of attack where an attacker tricks a victim into executing an unwanted action on a web application in which they are already authenticated. The attacker exploits the victim's trust in the web application to make a request on their behalf, without their knowledge or consent.</p>
+<h2>How does a CSRF Attack work?</h2>
+<p>In a CSRF Attack, the attacker creates a malicious website or page that contains a request to a vulnerable web application. The victim is then lured into visiting the attacker's site, either through a phishing email, a malicious ad, or by embedding the request in a seemingly harmless page. When the victim visits the attacker's site, the request is automatically executed, causing the victim to perform an unwanted action on the vulnerable web application.</p>
+<h2>What is the impact of a successful CSRF Attack?</h2>
+<p>A successful CSRF Attack can result in the unauthorized transfer of funds, the deletion of sensitive information, or the modification of account settings. The impact of a CSRF Attack depends on the nature of the request and the level of access the victim has to the targeted web application. In some cases, a CSRF Attack can also be used as a stepping stone to launch other attacks, such as Cross-Site Scripting (XSS) or Brute Force Attacks.</p>
+<p>Let's take a look at a vulnarable code that is vulnerable to CSRF:</p>
+<pre><code>
+
+  @csrf_exempt
+  def changepass(request):
+    context = { "navinfo": config['DEFAULT']['CSRF'] }
+    if request.method == 'POST':
+        password1 = request.POST.get('newpass1')
+        password2 = request.POST.get('newpass2')
+        if (password1 == password2):
+            context = { "msg": 'Your new password is ' + password1,
+                        "navinfo": config['DEFAULT']['CSRF']
+            }
+        else:
+            context = { "msg": 'Passwords did not match.',
+                        "navinfo": config['DEFAULT']['CSRF']
+             }
+        return render(request, 'user/changepass.html', context)
+    return render(request, 'user/changepass.html', context)
+
+
+</code></pre>
+<h2>How to prevent CSRF Attacks</h2>
+<p>There are several ways to prevent CSRF Attacks, including:</p>
+<ul>
+  <li>Using a unique token for each request that is checked on the server</li>
+  <li>Checking the HTTP Referer header to ensure that requests are originating from the same site</li>
+  <li>Enabling SameSite cookie attributes to restrict cookie usage to first-party context</li>
+  <li>Using CAPTCHA to prevent automated requests</li>
+</ul>
+<p>It's important to be proactive in protecting against CSRF Attacks, as they are a common and ongoing threat to the security of web applications. </p>
+<p>Django has built-in protection against CSRF (Cross-Site Request Forgery) attacks.
+<br>
+When a user submits a form in Django, a CSRF token is included in the form as a hidden field. The token is unique for each form and each user session. When the form is submitted, the server checks the token to ensure that it matches the one that was originally sent to the user. If the token is not valid, the server rejects the request.
+<br>
+Django provides this protection by using a middleware called CsrfViewMiddleware, which is included by default in the MIDDLEWARE setting. This middleware sets a random CSRF token in a cookie, and adds the same token to the form as a hidden field. When the user submits the form, the token in the cookie is compared to the token in the form. If they match, the request is considered valid and processed by the server.
+<br><br>
+In addition, Django provides a csrf_exempt decorator that can be used to exempt specific views or functions from CSRF protection. However, this should be used with caution and only in cases where the view or function does not perform any sensitive or destructive actions.</p>
+<br><br>
+{% endblock %}

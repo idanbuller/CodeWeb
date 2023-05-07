@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>DOM Based XSS</h1>
+<h2>Overview</h2>
+<p>DOM Based XSS (Cross-Site Scripting) is a type of vulnerability that occurs when the client-side JavaScript code of a web application interacts with untrusted data in a dangerous way. The untrusted data is usually user-supplied input that is dynamically added to the web page, such as URL parameters or form data. Unlike traditional XSS, which injects malicious code into the server-side output of the web page, DOM Based XSS occurs entirely within the client-side JavaScript code of the web page.</p>
+<p>A successful DOM Based XSS attack can allow an attacker to steal sensitive information such as user credentials, manipulate web page content, and perform other malicious actions. In this section, we'll explain what DOM Based XSS is, provide some common examples, and summarize how to prevent DOM Based XSS vulnerabilities in web applications.</p>
+<h2>What is the impact of a successful DOM Based XSS attack?</h2>
+<p>A successful DOM Based XSS attack can result in sensitive information being stolen or manipulated, such as user credentials, or sensitive data displayed on the web page. In some cases, an attacker may be able to take complete control over the affected web page, allowing them to perform arbitrary actions on behalf of the user. The impact of a DOM Based XSS attack can range from being a minor inconvenience to causing serious harm to users and the affected website or application.</p>
+<p>In order to prevent DOM Based XSS attacks, it is important to properly sanitize user-supplied input before inserting it into a web page. This can be done using various techniques such as encoding user input, using a Content Security Policy (CSP), or using a JavaScript library that provides XSS protection. </p>
+
+
+<p>Now, try it yourself and choose a post <br>
+    <p>Use the following code: <br>
+    <strong>choose the &lt;script>alert("XSS")&lt;/script> post <br></strong>
+</p>
+<div class="content-section">
+   <form method="POST">
+        {% csrf_token %}
+        <select name="post">
+            {% for post in posts %}
+                <option value="{{ post.id }}">{{ post.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+</div>
+<br>
+<h2>How To Defend?</h2>
+<h5>After exploiting the <strong>DOM Based XSS</strong> vulnerability, let's defend it! <br>
+</h5>
+<pre>
+								<code>
+def DOMBasedXSS(request):
+    if request.method == 'POST':
+        post_id = request.POST.get('post')
+        post = Post.objects.get(id=post_id)
+        print(post_id)
+        return render(request, 'blog/test.html', {'post': post})
+    else:
+        posts = Post.objects.all()
+        return render(request, 'blog/DOMBasedXSS.html', {'posts': posts})
+</code>
+							</pre>
+<p> In this example, the 'escape' filter is applied to the form variable before it is rendered. This filter will escape any special characters in the form data, making it difficult for an attacker to inject malicious script. Additionally, by removing the safe filter, the Django template engine will no longer trust that the form data is safe and will apply the necessary escaping automatically.</p>
+<br>
+{% endblock content %}

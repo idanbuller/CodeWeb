@@ -1,11 +1,12 @@
+
+![CodeWeblogo](images\CodeWeblogo.png)
+
+
 # 🛠 CodeWeb 🛠
 
 This project is a web-based E-learning system that enables users to learn, implement, and protect against well-known web attacks, such as OWASP top 10. We integrated our knowledge as computer science students, combined with a course in computer security and cyber principles, to develop this system.
 
 We understand that there are more and more cyber e-learning systems, and this is because they allow users to learn from anywhere and at any time, with access to updated and comprehensive information. Our system includes several components such as Content Management System (CMS), Learning Management System (LMS), advanced and accessible user interface, as well as software and tools for translation, data transfer, and resource management.
-
-
-![CodeWeblogo](images/CodeWeblogo.png)
 
 
 ## Authors
@@ -39,6 +40,7 @@ Insert gif or link to demo
 ## Features
 
 #### ⚡️XSS HUB
+![XSSHUB](images\XSSHUB.png)
 Learn about the latest Cross-Site-Scripting threats and how to protect yourself online with our interactive and engaging XSS Hub:
 
 - Stored XSS
@@ -47,18 +49,14 @@ Learn about the latest Cross-Site-Scripting threats and how to protect yourself 
 
 - Reflected XSS
 
-
-![XSSHUB](images/XSSHUB.jpg)
-
 #### ⚡️SQL Injection
+![SQLiHUB](images\SQLiHUB.png)
 Learn about the latest SQL Injection threats and how to protect yourself online with our interactive and engaging SQL Injection Hub:
 
 - SQL Injection
 
-
-![SQLiHUB](images/SQLiHUB.jpg)
-
 #### ⚡️Bonus HUB
+![BONUSHUB](images\BONUSHUB.png)
 Learn about the latest Cyber Security threats and how to protect yourself online with our interactive and engaging Bonus Hub:
 
 - Brute Force
@@ -70,7 +68,7 @@ Learn about the latest Cyber Security threats and how to protect yourself online
 - CSRF
 
 
-![BONUSHUB](images/BONUSHUB.jpg)
+
 
 ## Installation
 
@@ -168,7 +166,7 @@ This code the the URL configuration of the project.
 
 - The next four URL patterns are related to the password reset feature. They map the URLs /password-reset/, /password-reset/done/, /password-reset-confirm/<uidb64>/<token>/, and /password-reset-complete/ to the corresponding built-in Django views for the password reset feature.
 
-- Finally, the last URL pattern includes the URL configuration of another Django app called codewebapp, by mapping the root URL to the codewebapp.urls URL configuration.
+- Finally, the last URL pattern includes the URL configuration of another Django app called blog, by mapping the root URL to the blog.urls URL configuration.
 
 - The last if statement is a check to see if the project is in debug mode, and if it is, it adds a URL pattern for serving media files at settings.MEDIA_URL. This is done using the static() function imported from django.conf.urls.static. The document_root argument specifies the local directory to serve the media files from.
 
@@ -199,7 +197,7 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'
          ),
          name='password_reset_complete'),
-    path('', include('codewebapp.urls')),
+    path('', include('blog.urls')),
 ]
 ```
 
@@ -255,10 +253,10 @@ def profile(request):
 ```
 
 
-### codewebapp\urls.py
+### blog\urls.py
 This code defines the URL patterns for CodeWeb's web application. Each URL pattern is associated with a specific view function that gets called when the user requests that URL.
 
-- The urlpatterns list starts by importing several view functions from a views.py file. These functions correspond to different pages in the application, such as the home page, user profile pages, and various codewebapp posts. It also imports a function called change_password from the same views.py file.
+- The urlpatterns list starts by importing several view functions from a views.py file. These functions correspond to different pages in the application, such as the home page, user profile pages, and various blog posts. It also imports a function called change_password from the same views.py file.
 
 - Each URL pattern in urlpatterns is defined using the path() function. The first argument to path() is the URL pattern that the user will request. The second argument is the view function that should be called when the user requests that URL. The third argument is an optional name that can be used to refer to the URL pattern in other parts of the code.
 
@@ -270,41 +268,41 @@ This code defines the URL patterns for CodeWeb's web application. Each URL patte
 
 ```python
 urlpatterns = [
-    path('', PostListView.as_view(), name='codewebapp-home'),
+    path('', PostListView.as_view(), name='blog-home'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('about/', views.about, name='codewebapp-about'),
-    path('AllSQLi/', views.AllSQLi, name='codewebapp-AllSQLi'),
-    path('SQLi/', views.SQLi, name='codewebapp-SQLi'),
-    path('BlindSQLi/', views.BlindSQLi, name='codewebapp-BlindSQLi'),
-    path('BruteForce/', views.BruteForce, name='codewebapp-BruteForce'),
-    path('AllXSS/', views.AllXSS, name='codewebapp-AllXSS'),
-    path('DOMBasedXSS/', views.DOMBasedXSS, name='codewebapp-DOMBasedXSS'),
-    path('ReflectedXSS/', views.ReflectedXSS, name='codewebapp-ReflectedXSS'),
-    path('PermanentXSS/', views.PermanentXSS, name='codewebapp-PermanentXSS'),
-    path('AllBonus/', views.AllBonus, name='codewebapp-AllBonus'),
-    path('UserEnumeration/', views.UserEnumeration, name='codewebapp-UserEnumeration'),
-    path('ClickJacking/', views.ClickJacking, name='codewebapp-ClickJacking'),
-    path('CSRF/', views.CSRF, name='codewebapp-CSRF'),
-    path('search/', views.search, name='codewebapp-search'),
-    path('posts/', views.posts, name='codewebapp-posts'),
+    path('about/', views.about, name='blog-about'),
+    path('AllSQLi/', views.AllSQLi, name='blog-AllSQLi'),
+    path('SQLi/', views.SQLi, name='blog-SQLi'),
+    path('BlindSQLi/', views.BlindSQLi, name='blog-BlindSQLi'),
+    path('BruteForce/', views.BruteForce, name='blog-BruteForce'),
+    path('AllXSS/', views.AllXSS, name='blog-AllXSS'),
+    path('DOMBasedXSS/', views.DOMBasedXSS, name='blog-DOMBasedXSS'),
+    path('ReflectedXSS/', views.ReflectedXSS, name='blog-ReflectedXSS'),
+    path('PermanentXSS/', views.PermanentXSS, name='blog-PermanentXSS'),
+    path('AllBonus/', views.AllBonus, name='blog-AllBonus'),
+    path('UserEnumeration/', views.UserEnumeration, name='blog-UserEnumeration'),
+    path('ClickJacking/', views.ClickJacking, name='blog-ClickJacking'),
+    path('CSRF/', views.CSRF, name='blog-CSRF'),
+    path('search/', views.search, name='blog-search'),
+    path('posts/', views.posts, name='blog-posts'),
     path('change-password/', change_password, name='change_password'),
 ]
 
 ```
 
 
-### codewebapp\views.py
+### blog\views.py
 The code defines views for rendering templates and database queries, and uses the Django's built-in models, forms and authentication features.
 
 Here is a summary of what the code does:
 
-- home(request): This function retrieves all the posts from the database and displays them on the home page of the codewebapp.
+- home(request): This function retrieves all the posts from the database and displays them on the home page of the blog.
 
-- PostListView(ListView): This class retrieves all the posts from the database and displays them on the home page of the codewebapp using Django's generic ListView. It also allows the posts to be paginated.
+- PostListView(ListView): This class retrieves all the posts from the database and displays them on the home page of the blog using Django's generic ListView. It also allows the posts to be paginated.
 
 - UserPostListView(ListView): This class retrieves all the posts for a particular user from the database and displays them on the user's profile page. It also allows the posts to be paginated.
 
@@ -350,7 +348,7 @@ Here is a summary of what the code does:
 
 ```python
 def about(request):
-    return render(request, 'codewebapp/about.html', {'title': 'About'})
+    return render(request, 'blog/about.html', {'title': 'About'})
 
 def DOMBasedXSS(request):
     #posts = Post.objects.all()
@@ -358,10 +356,10 @@ def DOMBasedXSS(request):
         post_id = request.POST.get('post')
         post = Post.objects.get(id=post_id)
         print(post_id)
-        return render(request, 'codewebapp/test.html', {'post': post})
+        return render(request, 'blog/test.html', {'post': post})
     else:
         posts = Post.objects.all()
-        return render(request, 'codewebapp/DOMBasedXSS.html', {'posts': posts})
+        return render(request, 'blog/DOMBasedXSS.html', {'posts': posts})
 
 def ReflectedXSS(request):
     model = Post
@@ -370,185 +368,12 @@ def ReflectedXSS(request):
     if query:
         results = Post.objects.filter(Q(title=query) | Q(content=query))
 
-    return render(request, 'codewebapp/ReflectedXSS.html', {'results': results, 'query': query})
+    return render(request, 'blog/ReflectedXSS.html', {'results': results, 'query': query})
 
     ...
     ...
     ...
 ```
-  
-  
-### CodeWebApp\templates\CodeWebApp\base.html
-- The first line {% load static %} is a template tag that loads the static template tag library. This allows the use of static files, such as CSS and JavaScript files, in the HTML template.
-
-- The head section of the HTML includes several meta tags, a few links to external CSS stylesheets, and a few script tags. The first three CSS links are used to import the main CSS file and two additional CSS files for specific pages in the application. The fourth CSS link imports a stylesheet for syntax highlighting code blocks. The script tag is used to initialize syntax highlighting on the page.
-
-- The body section contains a header with a navigation bar, and a main section. The navigation bar contains links to different pages in the application. The main section contains the main content of the page.
-
-- There is also some conditional logic in the template using Django template tags. The {% if title %} statement checks if the variable title is defined and if so, displays it in the title tag. If title is not defined, a default title is displayed.
-
-- There are also several other {% if %} statements that check if the user is authenticated or if there are any messages to display, and then render appropriate HTML elements accordingly.
-
-- Finally, there are several script tags at the end of the body section which import the necessary JavaScript libraries for the navigation bar and other functionality.
-
-```
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/home.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/about.css' %}">
-    <!-- CSS styles -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/rainbow.min.css">
-    <!-- Javascript -->
-    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/highlight.min.js"></script>
-    <script>
-      hljs.initHighlightingOnLoad();
-    </script> {% if title %} <title>CodeWeb - {{ title }}</title> {% else %} <title>CodeWeb Packages</title> {% endif %}
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a href="{% url 'blog-home' %}">
-          <img src="{% static 'imgs/CodeWeblogo.png'%}" width="50" height="50">
-          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">CodeWeb LTD</a>
-        </a>
-        <div class="container">
-          <button class="navbar-toggler"
-                  type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-<!--              <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>-->
-<!--              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>-->
-              <a class="nav-item nav-link" href="{% url 'blog-AllXSS' %}">XSS HUB</a>
-              <a class="nav-item nav-link" href="{% url 'blog-AllSQLi' %}">SQL Injection HUB</a>
-              <a class="nav-item nav-link" href="{% url 'blog-AllBonus' %}">Bonus HUB</a>
-            </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav"> {% if user.is_authenticated %} <a class="nav-item nav-link" href="{% url 'blog-posts' %}">XSS POC</a>
-<a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-              <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a> <a class="nav-item nav-link" >Hello, {{ user.username }}</a> {% else %} <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> {% endif %}
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8"> {% if messages %} {% for message in messages %} <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-          </div> {% endfor %} {% endif %} {% block content %}{% endblock %} </div>
-        {% if user.is_authenticated %}
-          {% endif %}
-        </div>
-      </div>
-    </main>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
-```
-
-    
-### CodeWebApp\templates\CodeWebApp\SQLi.html
-This code defines an HTML page that discusses SQL injection attacks and how they work. The page contains several sections that explain what SQL injection is, how it can be used to retrieve hidden data, and the impact that a successful SQL injection attack can have on an organization. The page also includes a form that allows the user to log in to an application, and provides instructions for using SQL injection to bypass the login process.
-
-- The code is written in Django's templating language, which is used to generate HTML pages dynamically. The {% extends "blog/base.html" %} statement at the top of the file indicates that this page extends a base template called base.html. This allows the page to inherit common elements like a header and footer from the base template.
-
-- The {% block content %} and {% endblock %} statements define a block of content that will be inserted into the base template at the location of the {% block content %} statement in the base template. This allows pages that extend the base template to define their own content without having to duplicate the common elements.
-
-- The content of the page consists of several sections that explain what SQL injection is and how it can be used to retrieve hidden data from a database. The page also includes a form that allows the user to log in to an application. The form contains two fields for entering a username and password, and a submit button. The {% csrf_token %} statement is included to add Cross-Site Request Forgery protection to the form.
-
-- The code also provides instructions for using SQL injection to bypass the login process. Specifically, it instructs the user to enter the username test' OR 1=1 -- and any password into the form. The -- sequence indicates a SQL comment, which causes the rest of the query to be ignored. The OR 1=1 statement is always true, which means that the query will return all rows from the users table. This allows the user to bypass the login process and gain access to the application without a valid username and password.
-
-- The code also defines a view function called SQLi that handles the form submission. The function retrieves the username and password from the form data and uses them to construct a SQL query that checks if a user with the given username and password exists in the database. If a matching user is found, the function logs the user in and redirects them to the home page. If not, the function returns an error message.
-
-- The code uses Django's built-in database API to execute the SQL query. Specifically, it uses the connection.cursor() method to create a new database cursor, and then uses the cursor.execute() method to execute the SQL query. The results of the query are returned as a cursor.fetchall() object, which contains a list of rows that match the query. In this case, the query is expected to return a single row if a matching user is found, or an empty result set if not.
-  
-  ```html
-  ...
-  ...
-  <div class="content-section">
-  <form method="POST"> {% csrf_token %} <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Log In</legend>
-      <label for="username">Username:</label>
-      <input type="text" name="username" required>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" name="password" required>
-      <br>
-    </fieldset>
-    <div class="form-group">
-      <button class="btn btn-outline-info" type="submit">Login</button>
-      <small class="text-muted ml-2">
-        <a href="{% url 'password_reset' %}">Forgot Password?</a>
-      </small>
-    </div>
-  </form> {% if error %} <p>{{ error }}</p> {% endif %} <div class="border-top pt-3">
-    <small class="text-muted"> Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-    </small>
-  </div>
-</div>
-  ...
-  ...
-  ```
-
-### CodeWebApp\templates\CodeWebApp\ReflectedXSS.html
-This is a Django template file that is used to render a web page related to Reflected Cross-Site Scripting (XSS) vulnerabilities.
-
-- The template extends a base HTML file and loads some tags for a Django library called "crispy_forms_tags". It then defines a content block and adds various elements to it, such as headings, paragraphs, and forms.
-
-- The page explains what Reflected XSS is, the impact of a successful attack, and how to prevent it. The page also includes a form where users can search for posts and a function called "ReflectedXSS" that searches the posts based on user input.
-
-- The page also provides an example of how to exploit the Reflected XSS vulnerability by entering a script tag containing an alert message. It then provides a solution to defend against Reflected XSS attacks by sanitizing user input before displaying it on the page and avoiding the use of the "safe" option in Django.
-  
-
-```html
-...
-...
-<div class="content-section">
-    <form method="GET" action="{% url 'CodeWebApp-ReflectedXSS' %}">
-
-
-        <input name="q" value="{{request.GET.q}}" placeholder="search..">
-        <button class=" btn btn-success" type="submit">
-            search
-        </button>
-
-
-    </form>
-    <div>
-    <ul>
-        <h2>Your query was:
-            <br/>
-            <b>{{query | safe}}</b>
-        </h2>
-
-        {% for element in results %}
-            <div>
-                <h2 class="article-title">{{ element.title | safe }}</h2>
-                <p class="article-content">{{ element.content | safe }}</p>
-            </div>
-        {% endfor %}
-        </ul>
-    </div>
-</div>
-...
-...
-```
-  
 ## Future Development
 This is a long-term development plan that outlines potential improvements and new features that could be considered for our system. The specific priorities and timeline will depend on the goals and needs of the system, as well as the resources available for development.
 

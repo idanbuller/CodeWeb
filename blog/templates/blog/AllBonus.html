@@ -1,0 +1,53 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Welcome to Bonus HUB!</h1>
+    <p>Learn about the latest Cyber Security threats and how to protect yourself online with our interactive and engaging Bonus Hub.</p>
+    <a href="/about" class="btn btn-primary">Learn About CodeWeb</a>
+  </div>
+  <div id="courses" class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Brute Force</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from malicious Brute Force attack and more.</p>
+          <a href="/BruteForce" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">UserEnumeration</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from User Enumeration attack.</p>
+          <a href="/UserEnumeration" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+              <div class="card-body">
+          <h5 class="card-title">ClickJacking</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from malicious web ClickJacking attack.</p>
+          <a href="/ClickJacking" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <img src="/media/default.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">CSRF</h5>
+          <p class="card-text">Learn the basics of cyber security and how to protect from Cross-Site Request Forgery (CSRF) attacks.</p>
+          <a href="/CSRF" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
