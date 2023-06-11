@@ -40,7 +40,7 @@ Insert gif or link to demo
 ## Features
 
 #### ⚡️XSS HUB
-![XSSHUB](images/XSSHUB.png)
+![XSSHUB](images\XSSHUB.png)
 Learn about the latest Cross-Site-Scripting threats and how to protect yourself online with our interactive and engaging XSS Hub:
 
 - Stored XSS
@@ -50,13 +50,13 @@ Learn about the latest Cross-Site-Scripting threats and how to protect yourself 
 - Reflected XSS
 
 #### ⚡️SQL Injection
-![SQLiHUB](images/SQLiHUB.png)
+![SQLiHUB](images\SQLiHUB.png)
 Learn about the latest SQL Injection threats and how to protect yourself online with our interactive and engaging SQL Injection Hub:
 
 - SQL Injection
 
 #### ⚡️Bonus HUB
-![BONUSHUB](images/BONUSHUB.png)
+![BONUSHUB](images\BONUSHUB.png)
 Learn about the latest Cyber Security threats and how to protect yourself online with our interactive and engaging Bonus Hub:
 
 - Brute Force
